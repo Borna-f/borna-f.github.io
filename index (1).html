@@ -1,0 +1,1022 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Borna Fatehi — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --bg2: #0f1525;
+    --bg3: #151c30;
+    --accent: #4a9eff;
+    --accent2: #2dcc8f;
+    --accent3: #f0a04b;
+    --text: #e8edf5;
+    --text2: #8b96ad;
+    --text3: #4a5568;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(74,158,255,0.25);
+    --serif: 'DM Serif Display', Georgia, serif;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* grid texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,158,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,158,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10,14,26,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-decoration: none;
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text2);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--accent); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: 8rem 4rem 4rem;
+    z-index: 1;
+  }
+
+  .hero-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.2s forwards;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(3.5rem, 8vw, 7rem);
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.4s forwards;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 1.15rem;
+    color: var(--text2);
+    max-width: 560px;
+    line-height: 1.8;
+    margin-bottom: 2.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.6s forwards;
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 3rem;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.8s forwards;
+  }
+
+  .tag {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 5px 14px;
+    border: 1px solid var(--border2);
+    border-radius: 2px;
+    color: var(--accent);
+    background: rgba(74,158,255,0.05);
+  }
+
+  .tag.green {
+    border-color: rgba(45,204,143,0.3);
+    color: var(--accent2);
+    background: rgba(45,204,143,0.05);
+  }
+
+  .tag.amber {
+    border-color: rgba(240,160,75,0.3);
+    color: var(--accent3);
+    background: rgba(240,160,75,0.05);
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1s forwards;
+  }
+
+  .btn {
+    font-family: var(--mono);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 14px 28px;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: all 0.2s;
+    display: inline-block;
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background: #6ab4ff;
+    transform: translateY(-1px);
+  }
+
+  .btn-secondary {
+    border: 1px solid var(--border2);
+    color: var(--accent);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(74,158,255,0.08);
+    transform: translateY(-1px);
+  }
+
+  .hero-stats {
+    position: absolute;
+    right: 4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    opacity: 0;
+    animation: fadeLeft 0.8s ease 1.2s forwards;
+  }
+
+  .stat {
+    text-align: right;
+    border-right: 2px solid var(--border2);
+    padding-right: 1.5rem;
+  }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 2.8rem;
+    color: var(--accent);
+    line-height: 1;
+    display: block;
+  }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+    padding: 6rem 4rem;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .section-label::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 3rem;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .about-text p {
+    color: var(--text2);
+    margin-bottom: 1.25rem;
+    font-size: 1.05rem;
+    line-height: 1.85;
+  }
+
+  .about-text p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .about-right {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .skill-group {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.25rem;
+  }
+
+  .skill-group-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .skill-pill {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text2);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 2px;
+  }
+
+  /* EXPERIENCE */
+  .exp-list { display: flex; flex-direction: column; gap: 0; }
+
+  .exp-item {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 3rem;
+    padding: 2.5rem 0;
+    border-top: 1px solid var(--border);
+    position: relative;
+  }
+
+  .exp-item:last-child { border-bottom: 1px solid var(--border); }
+
+  .exp-meta {}
+
+  .exp-company {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+  }
+
+  .exp-period {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.05em;
+  }
+
+  .exp-role {
+    font-family: var(--serif);
+    font-size: 1.4rem;
+    color: var(--text);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.95rem;
+    color: var(--text2);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.7;
+  }
+
+  .exp-bullets li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-size: 0.8rem;
+    top: 3px;
+  }
+
+  /* PUBLICATIONS */
+  .pub-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .pub-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    transition: border-color 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .pub-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-2px);
+  }
+
+  .pub-venue {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent2);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .pub-title {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    color: var(--text);
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+
+  .pub-desc {
+    font-size: 0.875rem;
+    color: var(--text2);
+    line-height: 1.65;
+  }
+
+  .pub-year {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 1rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* PROJECTS */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .project-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+
+  .project-card:hover {
+    border-color: var(--border2);
+    transform: translateY(-3px);
+  }
+
+  .project-card.featured {
+    grid-column: span 2;
+    border-color: rgba(74,158,255,0.2);
+    background: linear-gradient(135deg, var(--bg2) 0%, rgba(74,158,255,0.04) 100%);
+  }
+
+  .project-icon {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  .project-type {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-name {
+    font-family: var(--serif);
+    font-size: 1.25rem;
+    color: var(--text);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .project-desc {
+    font-size: 0.9rem;
+    color: var(--text2);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .project-tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tech-tag {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .project-link {
+    display: inline-block;
+    margin-top: 1rem;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .project-link:hover { border-bottom-color: var(--accent); }
+
+  /* CONTACT */
+  .contact-section {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .contact-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .contact-headline {
+    font-family: var(--serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--text);
+    line-height: 1.15;
+    margin-bottom: 1rem;
+  }
+
+  .contact-sub {
+    font-size: 1rem;
+    color: var(--text2);
+    line-height: 1.8;
+  }
+
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    transition: border-color 0.2s, background 0.2s;
+    background: var(--bg3);
+  }
+
+  .contact-link:hover {
+    border-color: var(--border2);
+    background: rgba(74,158,255,0.05);
+  }
+
+  .contact-link-icon {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    min-width: 72px;
+    text-transform: uppercase;
+  }
+
+  .contact-link-text {
+    font-size: 0.9rem;
+    color: var(--text2);
+  }
+
+  /* FOOTER */
+  footer {
+    position: relative;
+    z-index: 1;
+    padding: 2rem 4rem;
+    text-align: center;
+  }
+
+  footer p {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 0.08em;
+  }
+
+  /* DIVIDER */
+  .section-divider {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeLeft {
+    from { opacity: 0; transform: translate(-20px, -50%); }
+    to   { opacity: 1; transform: translate(0, -50%); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--bg3); border-radius: 2px; }
+
+  @media (max-width: 900px) {
+    nav { padding: 1.25rem 2rem; }
+    .nav-links { gap: 1.5rem; }
+    .hero { padding: 7rem 2rem 4rem; }
+    .hero-stats { display: none; }
+    section { padding: 4rem 2rem; }
+    .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .pub-grid { grid-template-columns: 1fr; }
+    .project-grid { grid-template-columns: 1fr; }
+    .project-card.featured { grid-column: span 1; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.75rem; }
+    .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    footer { padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">BF.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#publications">Research</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <p class="hero-eyebrow">// Software Engineer &amp; Researcher</p>
+    <h1 class="hero-name">Borna<br><em>Fatehi</em></h1>
+    <p class="hero-desc">I build systems that ship. Senior engineer at The Walt Disney Company, leading automation across CI/CD pipelines and test frameworks. Published researcher at the intersection of HCI, game design, and human-centered engineering.</p>
+    <div class="hero-tags">
+      <span class="tag">Disney · Software Engineer II</span>
+      <span class="tag green">5 Peer-Reviewed Publications</span>
+      <span class="tag amber">MSc Game Science · MBA</span>
+      <span class="tag">New York City</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#experience" class="btn btn-primary">View Experience</a>
+      <a href="https://www.linkedin.com/in/bornafatehi" target="_blank" class="btn btn-secondary">LinkedIn →</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-num">6+</span>
+      <span class="stat-label">Years Experience</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">8</span>
+      <span class="stat-label">Disney Projects</span>
+    </div>
+    <div class="stat">
+      <span class="stat-num">5</span>
+      <span class="stat-label">Publications</span>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <p class="section-label reveal">About</p>
+    <h2 class="section-title reveal">Engineer who thinks<br>like a researcher</h2>
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>I'm a software engineer with a background that most engineers don't have: <strong>I've run controlled experiments on human behavior, published peer-reviewed papers on interaction design, and shipped production Android applications to clinical trial participants</strong> — all before landing at Disney.</p>
+        <p>At The Walt Disney Company, I serve as automation engineering lead across 8 projects simultaneously, owning CI/CD pipelines, API and UI test frameworks, and the technical growth of vendor engineering teams. I hold SDETs accountable to the same standards I'd hold any FTE.</p>
+        <p>Before Disney, I spent nearly three years at BioSensics building full-stack Android applications for FDA-regulated clinical trials — integrating real-time streams from 5 concurrent wearable biosensors and shipping a gamified exercise app designed to improve physical activity in older adults.</p>
+        <p>I hold an <strong>MSc in Game Science and Design</strong> from Northeastern University (focus: game user research &amp; HCI) and an <strong>MBA</strong> from Campbellsville University. I'm a native Persian speaker and have lived and worked across Tehran, Boston, and New York City.</p>
+      </div>
+      <div class="about-right reveal">
+        <div class="skill-group">
+          <p class="skill-group-label">Engineering</p>
+          <div class="skill-pills">
+            <span class="skill-pill">CI/CD Pipelines</span>
+            <span class="skill-pill">Test Automation</span>
+            <span class="skill-pill">API Testing</span>
+            <span class="skill-pill">UI Automation</span>
+            <span class="skill-pill">Android / Java</span>
+            <span class="skill-pill">Vue / Vuex</span>
+            <span class="skill-pill">C# / ASP.NET</span>
+            <span class="skill-pill">SQL Server</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Research & Design</p>
+          <div class="skill-pills">
+            <span class="skill-pill">HCI</span>
+            <span class="skill-pill">Game User Research</span>
+            <span class="skill-pill">Eye Tracking</span>
+            <span class="skill-pill">Unity / C#</span>
+            <span class="skill-pill">AR / Vuforia</span>
+            <span class="skill-pill">Qualtrics</span>
+            <span class="skill-pill">SPSS / R</span>
+            <span class="skill-pill">Statistical Analysis</span>
+          </div>
+        </div>
+        <div class="skill-group">
+          <p class="skill-group-label">Leadership</p>
+          <div class="skill-pills">
+            <span class="skill-pill">Vendor Management</span>
+            <span class="skill-pill">Performance Reviews</span>
+            <span class="skill-pill">Technical Coaching</span>
+            <span class="skill-pill">Project Planning</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: var(--bg2);">
+  <div class="section-inner">
+    <p class="section-label reveal">Experience</p>
+    <h2 class="section-title reveal">Where I've<br>done the work</h2>
+    <div class="exp-list">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="exp-company">The Walt Disney Company</p>
+          <p class="exp-period">Nov 2022 — Present</p>
+          <p class="exp-period" style="margin-top:4px; color: var(--text3);">3 yrs 7 mo · New York</p>
+        </div>
+        <div class="exp-content">
+          <p class="exp-role">Software Engineer II</p>
+          <ul class="exp-bullets">
+            <li>Served as automation engineering lead across <strong>8 projects over tenure</strong>, consistently owning 2 concurrent workstreams — delivering full-cycle automation from scoping through production handoff.</li>
+            <li>Architected <strong>end-to-end API and UI test automation frameworks</strong> and reusable project templates, standardizing automation practices and significantly reducing onboarding time for new project teams.</li>
+            <li>Built and maintained <strong>CI/CD pipelines</strong> integrating automated test suites directly into merge request and nightly regression workflows, enabling faster and more reliable releases across multiple product teams.</li>
+            <li>Coached and delivered <strong>performance reviews for a vendor engineering team</strong>, maintaining quality standards and accountability without direct line authority — managing output, timelines, and technical growth for external contributors.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="exp-company">BioSensics</p>
+          <p class="exp-period">Jan 2020 — Oct 2022</p>
+          <p class="exp-period" style="margin-top:4px; color: var(--text3);">2 yrs 10 mo · Boston</p>
+        </div>
+        <div class="exp-content">
+          <p class="exp-role">Software Engineer</p>
+          <ul class="exp-bullets">
+            <li>Built <strong>full-stack Android applications</strong> (Java / Vue / Vuex) for FDA-regulated clinical trials, integrating real-time data streams from 5 concurrent wearable biosensors.</li>
+            <li>Sole Android engineer on a <strong>gamified exercise application</strong> designed to increase physical activity motivation in older adults — shipped to clinical trial participants.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <p class="exp-company">Northeastern University</p>
+          <p class="exp-period">Feb 2016 — Aug 2021</p>
+          <p class="exp-period" style="margin-top:4px; color: var(--text3);">5 yrs 7 mo · Boston</p>
+        </div>
+        <div class="exp-content">
+          <p class="exp-role">Research Assistant — Game Design, HCI &amp; Data Science</p>
+          <ul class="exp-bullets">
+            <li>Built an <strong>augmented reality crowdsourcing game</strong> (Unity / C# / Vuforia) used to collect labeled image data at scale — combining game mechanics with research data collection.</li>
+            <li>Designed and ran controlled experiments across 4 climate-change games; <strong>co-authored 3 papers</strong> on computational thinking and game design patterns in middle school education.</li>
+            <li>Conducted statistical analysis for two <strong>clinical health studies</strong> using SPSS, R, and SQL Server — including pre/post drug effect analysis and patient medication belief modeling.</li>
+            <li>Developed a web-based demographic survey platform (ASP.NET / C# / SQL Server); ran <strong>ML analyses</strong> (linear regression, GEE, ANOVA) across collected responses.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PUBLICATIONS -->
+<section id="publications">
+  <div class="section-inner">
+    <p class="section-label reveal">Research</p>
+    <h2 class="section-title reveal">5 peer-reviewed<br>publications</h2>
+    <div class="pub-grid">
+
+      <a class="pub-card reveal" href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank">
+        <p class="pub-venue">ETRA '22 · Eye Tracking Research &amp; Applications</p>
+        <p class="pub-title">Guiding Game Design Decisions via Eye-Tracking: An Indie Game Case Study</p>
+        <p class="pub-desc">Applied biometric eye-tracking to study player behavior and inform design iteration on an indie game — bridging empirical user research with game development practice.</p>
+        <p class="pub-year">June 2022</p>
+      </a>
+
+      <a class="pub-card reveal" href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank">
+        <p class="pub-venue">FDG 2020 · Foundations of Digital Games</p>
+        <p class="pub-title">Tile-o-scope AR: An Augmented Reality Tabletop Image Labeling Game Toolkit</p>
+        <p class="pub-desc">Designed and built a multiplayer AR game toolkit that crowdsources image labeling through gameplay — enabling organizations to run citizen science missions via game mechanics.</p>
+        <p class="pub-year">September 2020</p>
+      </a>
+
+      <a class="pub-card reveal" href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank">
+        <p class="pub-venue">Journal of the American Pharmacists Association · 2019</p>
+        <p class="pub-title">Real-world Impact of GLP-1 Receptor Agonist Initiation on Medication Cost, HbA1c &amp; Weight</p>
+        <p class="pub-desc">Contributed as survey designer and statistician to a clinical outcomes study analyzing real-world impact of glucose-lowering medication on patient health metrics.</p>
+        <p class="pub-year">October 2019</p>
+      </a>
+
+      <a class="pub-card reveal" href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank">
+        <p class="pub-venue">FDG 2019 · Foundations of Digital Games</p>
+        <p class="pub-title">Gamifying Psychological Assessment: Insights from the Thematic Apperception Test</p>
+        <p class="pub-desc">Embedded a psychological test inside a game to compare engagement and validity against the standard version — showed gamified versions provided a more enjoyable experience while raising validity questions for further research.</p>
+        <p class="pub-year">August 2019</p>
+      </a>
+
+      <a class="pub-card reveal" href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank" style="grid-column: span 2;">
+        <p class="pub-venue">FDG '17 · Foundations of Digital Games</p>
+        <p class="pub-title">Exploring Emerging Design Patterns in Student-Made Climate Change Games</p>
+        <p class="pub-desc">Analyzed design patterns across 19 student-built educational games on climate change using the triadic game design framework — identifying prototypical patterns in how student designers represent abstract environmental concepts.</p>
+        <p class="pub-year">August 2017</p>
+      </a>
+
+    </div>
+    <p style="margin-top: 1.5rem; text-align: right;">
+      <a href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank" class="project-link">View all on Google Scholar →</a>
+    </p>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="background: var(--bg2);">
+  <div class="section-inner">
+    <p class="section-label reveal">Selected Work</p>
+    <h2 class="section-title reveal">Projects that<br>shipped</h2>
+    <div class="project-grid">
+
+      <div class="project-card featured reveal">
+        <span class="project-icon">◈</span>
+        <p class="project-type">AR · Citizen Science · Published</p>
+        <p class="project-name">Tile-O-Scope AR</p>
+        <p class="project-desc">A multiplayer augmented reality tabletop game toolkit that turns image labeling into collaborative gameplay. Organizations create projects; players sort, label, and locate images — contributing to mapping missions like disaster response. Presented at FDG 2020 and linked to a peer-reviewed publication.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Unity</span>
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">Vuforia</span>
+          <span class="tech-tag">AR</span>
+          <span class="tech-tag">Crowdsourcing</span>
+        </div>
+        <a href="http://cartosco.pe/#/home_ar" target="_blank" class="project-link">View project →</a>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-icon">◉</span>
+        <p class="project-type">Android · Clinical · Full-Stack</p>
+        <p class="project-name">BioSensics Clinical Apps</p>
+        <p class="project-desc">Full-stack Android applications for FDA-regulated clinical trials connecting to 5 simultaneous wearable biosensors. Includes a gamified exercise app designed to increase physical activity motivation in older adults.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Android</span>
+          <span class="tech-tag">Java</span>
+          <span class="tech-tag">Vue</span>
+          <span class="tech-tag">Vuex</span>
+          <span class="tech-tag">Biosensors</span>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-icon">◎</span>
+        <p class="project-type">Game Design · Education · Scratch</p>
+        <p class="project-name">Climate Change Games</p>
+        <p class="project-desc">Four educational games — Albedo, Insulation, Clouds, and a fourth — designed to teach climate science concepts to middle schoolers. Part of an STEM+C research program that produced two published papers on computational thinking.</p>
+        <div class="project-tech">
+          <span class="tech-tag">Scratch</span>
+          <span class="tech-tag">Game Design</span>
+          <span class="tech-tag">STEM Education</span>
+        </div>
+        <a href="https://scratch.mit.edu/projects/137930133/" target="_blank" class="project-link">Play Albedo →</a>
+      </div>
+
+      <div class="project-card reveal">
+        <span class="project-icon">◇</span>
+        <p class="project-type">Web · Research · Survey Platform</p>
+        <p class="project-name">Health Game Study Platform</p>
+        <p class="project-desc">A custom web survey platform (ASP.NET / C# / SQL Server) built for Northeastern's Health Technology Lab to study how participant demographics influence perception of game character demographics across 90 images per participant.</p>
+        <div class="project-tech">
+          <span class="tech-tag">ASP.NET</span>
+          <span class="tech-tag">C#</span>
+          <span class="tech-tag">SQL Server</span>
+          <span class="tech-tag">Research</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="reveal">
+      <p class="section-label">Contact</p>
+      <h2 class="contact-headline">Let's build<br>something together</h2>
+      <p class="contact-sub">Currently open to senior engineering roles at product-driven companies. Particularly interested in roles at the intersection of engineering rigor and human-centered design.</p>
+    </div>
+    <div class="contact-links reveal">
+      <a href="https://www.linkedin.com/in/bornafatehi" target="_blank" class="contact-link">
+        <span class="contact-link-icon">LinkedIn</span>
+        <span class="contact-link-text">linkedin.com/in/bornafatehi</span>
+      </a>
+      <a href="https://github.com/borna-f" target="_blank" class="contact-link">
+        <span class="contact-link-icon">GitHub</span>
+        <span class="contact-link-text">github.com/borna-f</span>
+      </a>
+      <a href="https://scholar.google.com/citations?user=MWV6M6oAAAAJ&hl=en" target="_blank" class="contact-link">
+        <span class="contact-link-icon">Scholar</span>
+        <span class="contact-link-text">Google Scholar Profile</span>
+      </a>
+      <a href="mailto:BornaFatehi@gmail.com" class="contact-link">
+        <span class="contact-link-icon">Email</span>
+        <span class="contact-link-text">BornaFatehi@gmail.com</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Borna Fatehi &nbsp;·&nbsp; Software Engineer &amp; Researcher &nbsp;·&nbsp; New York City</p>
+</footer>
+
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  reveals.forEach(el => observer.observe(el));
+
+  // nav highlight
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--accent)' : '';
+    });
+  });
+</script>
+</body>
+</html>
